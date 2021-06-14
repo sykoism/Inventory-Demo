@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="index.php" class="navbar-brand">KWH DDIR DSA Management System</a>
+          <a href="#" class="navbar-brand">KWH DDIR DSA Management System</a>
         </div>
       </div>
     </div>

@@ -6,11 +6,12 @@ class Inventory {
 	private $database  = 'dsa_inventory_demo';
 	private $equipment_details = 'ims_equipment_details';
 	private $equipment_used = 'ims_equipment_used';
-	private $exam_summary = 'ims_exam';
-	private $exam_details = 'ims_exam_detail';
-	private $exam_series = 'ims_exam_series';
-	private $staff_list = 'ims_staff';
-	private $supplier_list = 'ims_supplier';
+	private $examSummary = 'ims_exam';
+	private $examDetails = 'ims_exam_detail';
+	private $examSeries = 'ims_exam_series';
+	private $staffList = 'ims_staff';
+	private $supplierList = 'ims_supplier';
+	private $userTable = 'ims_user';
 	private $dbConnect = false;
 
     //sql connect

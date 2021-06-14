@@ -1,17 +1,16 @@
 <?php
 class Inventory {
-    private $host  = 'localhost';
-    private $user  = 'root';
-    private $password   = '';
-    private $database  = 'dsa_inventory_demo';   
-	private $EquipmentDetails = 'ims_equipment_details';	
-    private $EquipmentUsed = 'ims_equipment_used';
-	private $ExamSummary = 'ims_exam';
-	private $ExamDetails = 'ims_exam_detail';
-	private $ExamSeries = 'ims_exam_series';
-	private $StaffList = 'ims_staff';
-	private $SupplierList = 'ims_supplier';
-	private $orderTable = 'ims_order';
+	private $host  = 'localhost';
+	private $user  = 'root';
+	private $password   = '';
+	private $database  = 'dsa_inventory_demo';
+	private $equipment_details = 'ims_equipment_details';
+	private $equipment_used = 'ims_equipment_used';
+	private $exam_summary = 'ims_exam';
+	private $exam_details = 'ims_exam_detail';
+	private $exam_series = 'ims_exam_series';
+	private $staff_list = 'ims_staff';
+	private $supplier_list = 'ims_supplier';
 	private $dbConnect = false;
 
     //sql connect

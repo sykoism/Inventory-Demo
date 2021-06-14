@@ -1,15 +1,3 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    
-    <title>KWH DDIR DSA Management System</title>
-    
     <!--initialize login session-->
     <?php 
      session_start();
@@ -28,14 +16,7 @@
 	    }
     }
     ?>
-    
-  </head>
-  
-  <body>
-    <!-- Bootstrap JS -->
-    <script src="js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    
-    <?php include('inc/container.php');?>
+<?php include('inc/container.php');?>
     <div class="container">		
 	    <h2>KWH DDIR DSA Management System</h2>	
 	    <div class="login-form pull-left">		
@@ -58,10 +39,7 @@
 			    <p><b>User</b> : admin<br><b>Password</b> : 123</p>	
 		    </form>
 		    <br>
-	      </div>		
-      </div>	
+	    </div>		
+    </div>	
     
-    <?php include('inc/footer.php');?>
-  </body>
-
-</html>
+<?php include('inc/footer.php');?>

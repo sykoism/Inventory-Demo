@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include('inc/header.php');
-include 'Inventory.php';
+include 'function.php';
 $inventory = new Inventory();
 $inventory->checkLogin();
 ?>

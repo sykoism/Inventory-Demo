@@ -16,7 +16,7 @@
     include('inc/header.php');
     $loginError = '';
       if (!empty($_POST['username']) && !empty($_POST['pwd'])) {
-	      include 'Inventory.php';
+	      include 'function.php';
 	      $inventory = new Inventory();
 	      $login = $inventory->login($_POST['userid'], $_POST['pwd']); 
 	    if(!empty($login)) {

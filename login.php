@@ -16,6 +16,10 @@
 	    }
     }
     ?>
+
+<!--include custom stylesheet-->
+<link href="css/style.css" rel="stylesheet">
+
 <?php include('inc/container.php');?>
     <div class="container">		
 	    <h2>KWH DDIR DSA Management System</h2>	

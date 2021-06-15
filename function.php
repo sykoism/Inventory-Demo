@@ -46,7 +46,7 @@ class Inventory {
 		return $numRows;
 	}
 
-	public function login($email, $password){
+	public function login($userid, $password){
 		$password = md5($password);
 		$sqlQuery = "
 			SELECT userid, username, password, type, status

@@ -3,7 +3,7 @@
      session_start();
     include('inc/header.php');
     $loginError = '';
-      if (!empty($_POST['username']) && !empty($_POST['pwd'])) {
+      if (!empty($_POST['userid']) && !empty($_POST['pwd'])) {
 	      include 'function.php';
 	      $inventory = new Inventory();
 	      $login = $inventory->login($_POST['userid'], $_POST['pwd']); 

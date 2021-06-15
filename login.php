@@ -9,7 +9,7 @@
 	      $login = $inventory->login($_POST['userid'], $_POST['pwd']); 
 	    if(!empty($login)) {
 		    $_SESSION['username'] = $login[0]['username'];
-		    $_SESSION['name'] = $login[0]['name'];			
+		    $_SESSION['userid'] = $login[0]['userid'];			
 		    header("Location:index.php");
 	    } else {
 		      $loginError = "Invalid username or password!";

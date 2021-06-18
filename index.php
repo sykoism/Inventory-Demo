@@ -9,13 +9,10 @@ $inventory->checkLogin();
 
 <?php include('inc/container.php');?>
 
-<div class="container">		
-	<?php include("menus.php"); ?>   
-	
-	<div">
-  <h2>Under Contruction</h2>
-	</div>
+
+
+<h2>Under Contruction</h2>
 		
-</div>	
+	
 
 <?php include('inc/footer.php');?>

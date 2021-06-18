@@ -9,3 +9,6 @@ if(!empty($_GET['action']) && $_GET['action'] == 'logout') {
 	header("Location:index.php");
 }
 
+if(!empty($_POST['action']) && $_POST['action'] == 'supplierList') {
+	$inventory->getSupplierList();
+}

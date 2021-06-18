@@ -1,6 +1,6 @@
 </head>
 <body class="">
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,25 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="NewExam.php">New Exam</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="CurrentExam.php">Current Exam</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="EditExam.php">Previous Exam</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Sales.php">Sales Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="AddInventory.php">Add Inventory</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ManageInventory.php">Manage Inventory</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="InventoryExpire.php">Inventory Nearly Expired</a>
         </li>
       </ul>
       
@@ -27,6 +45,9 @@
   </div>
 </nav>
 	
-	<div class="container" style="min-height:500px;">
-	<div class=''>
-	</div>
+
+
+<div class="container" style="min-height:50px;">
+</div>
+
+<div class="container">

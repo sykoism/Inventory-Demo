@@ -20,7 +20,7 @@
 <!--include custom stylesheet-->
 <link href="css/style.css" rel="stylesheet">
 
-<?php include('inc/container.php');?>
+<?php include('inc/container_login.php');?>
     <div class="container">		
 	    <h2>KWH DDIR DSA Management System</h2>	
 	    <div class="login-form pull-left">		

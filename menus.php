@@ -5,7 +5,7 @@
 		</div>
 		<ul class="nav navbar-nav menus">		
 			<li><a href="NewExam.php" id="NewExam_menu">New Exam</a></li>
-      <li><a href="CurrentExam.php" id="CurrentExam_menu">Current Exam</a></li>
+			<li><a href="CurrentExam.php" id="CurrentExam_menu">Current Exam</a></li>
 			<li><a href="EditExam.php" id="EditExam_menu">Previous Exam</a></li>
 			<li><a href="Sales.php" id="Sales_menu">Sales Contact</a></li>
 			<li><a href="AddInventory.php" id="AddInventory_menu">Add Inventory</a></li>

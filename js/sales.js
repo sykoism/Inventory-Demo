@@ -12,12 +12,6 @@ $(document).ready(function(){
 			data:{action:'supplierList'},
 			dataType:"json"
 		},
-		"columnDefs":[
-			{
-				"target":[4,5],
-				"orderable":false
-			}
-		],
 		"pageLength": 25
 	});
 

@@ -62,10 +62,9 @@ class Inventory {
 	}
 
 	public function getSupplierList(){		
-		$sqlQuery = "SELECT * FROM ".$this->supplierTable." ";
+		$sqlQuery = "SELECT * FROM ".$this->supplierList." ";
 		if(!empty($_POST["search"]["value"])){
 			$sqlQuery .= 'WHERE (supplier_name LIKE "%'.$_POST["search"]["value"].'%" ';
-			$sqlQuery .= '(address LIKE "%'.$_POST["search"]["value"].'%" ';			
 		}
 		if(!empty($_POST["order"])){
 			$sqlQuery .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
@@ -88,11 +87,9 @@ class Inventory {
 			$supplierRows = array();
 			$supplierRows[] = $supplier['supplier_id'];		
 			$supplierRows[] = $supplier['supplier_name'];	
-			$supplierRows[] = $supplier['mobile'];			
-			$supplierRows[] = $supplier['address'];	
-			$supplierRows[] = $status;			
-			$supplierRows[] = '<button type="button" name="update" id="'.$supplier["supplier_id"].'" class="btn btn-warning btn-xs update">Update</button>';
-			$supplierRows[] = '<button type="button" name="delete" id="'.$supplier["supplier_id"].'" class="btn btn-danger btn-xs delete" >Delete</button>';
+			$supplierRows[] = $supplier['salesperson'];			
+			$supplierRows[] = $supplier['mobile'];	
+			$supplierRows[] = $status;
 			$supplierData[] = $supplierRows;
 		}
 		$output = array(

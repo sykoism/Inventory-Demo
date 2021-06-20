@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2021 at 02:36 PM
+-- Generation Time: Jun 20, 2021 at 10:17 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `dsa_inventory_demo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ims_equipment`
+--
+
+CREATE TABLE `ims_equipment` (
+  `EquipmentID` varchar(50) NOT NULL,
+  `EquipmentModel` varchar(255) NOT NULL,
+  `ExpiryDate` date NOT NULL,
+  `LotNum` int(20) NOT NULL,
+  `InventoryOnHand` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ims_equipment`
+--
+
+INSERT INTO `ims_equipment` (`EquipmentID`, `EquipmentModel`, `ExpiryDate`, `LotNum`, `InventoryOnHand`) VALUES
+('EQUI_TERUMO_12345', 'terumo_guidewire_035_M', '2022-07-13', 765832, 21);
 
 -- --------------------------------------------------------
 
@@ -41,37 +62,6 @@ CREATE TABLE `ims_equipment_details` (
 INSERT INTO `ims_equipment_details` (`EquipmentModel`, `EquipmentName`, `supplier_id`, `EquipmentType`) VALUES
 ('medtronic_catheter_6fr', 'Medtronic Pro-Flo Angiographic Catheter 6Fr', 222, 'catheter'),
 ('terumo_guidewire_035_M', 'Terumo Radifocus Guide Wire M', 111, 'guidewire');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ims_equipment_not_used`
---
-
-CREATE TABLE `ims_equipment_not_used` (
-  `EquipmentID` varchar(50) NOT NULL,
-  `EquipmentModel` varchar(255) NOT NULL,
-  `ExpiryDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ims_equipment_used`
---
-
-CREATE TABLE `ims_equipment_used` (
-  `EquipmentID` varchar(50) NOT NULL,
-  `EquipmentModel` varchar(255) NOT NULL,
-  `ExpiryDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ims_equipment_used`
---
-
-INSERT INTO `ims_equipment_used` (`EquipmentID`, `EquipmentModel`, `ExpiryDate`) VALUES
-('EQUI_TERUMO_12345', 'terumo_guidewire_035_M', '2022-07-13');
 
 -- --------------------------------------------------------
 
@@ -203,25 +193,18 @@ INSERT INTO `ims_user` (`userid`, `username`, `password`, `type`, `status`) VALU
 --
 
 --
+-- Indexes for table `ims_equipment`
+--
+ALTER TABLE `ims_equipment`
+  ADD PRIMARY KEY (`EquipmentID`),
+  ADD KEY `EquipmentModel` (`EquipmentModel`);
+
+--
 -- Indexes for table `ims_equipment_details`
 --
 ALTER TABLE `ims_equipment_details`
   ADD PRIMARY KEY (`EquipmentModel`),
   ADD KEY `supplier_id` (`supplier_id`);
-
---
--- Indexes for table `ims_equipment_not_used`
---
-ALTER TABLE `ims_equipment_not_used`
-  ADD PRIMARY KEY (`EquipmentID`),
-  ADD KEY `EquipmentModel` (`EquipmentModel`);
-
---
--- Indexes for table `ims_equipment_used`
---
-ALTER TABLE `ims_equipment_used`
-  ADD PRIMARY KEY (`EquipmentID`),
-  ADD KEY `EquipmentModel` (`EquipmentModel`);
 
 --
 -- Indexes for table `ims_exam`
@@ -263,22 +246,16 @@ ALTER TABLE `ims_supplier`
 --
 
 --
+-- Constraints for table `ims_equipment`
+--
+ALTER TABLE `ims_equipment`
+  ADD CONSTRAINT `ims_equipment_ibfk_1` FOREIGN KEY (`EquipmentModel`) REFERENCES `ims_equipment_details` (`EquipmentModel`);
+
+--
 -- Constraints for table `ims_equipment_details`
 --
 ALTER TABLE `ims_equipment_details`
   ADD CONSTRAINT `ims_equipment_details_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `ims_supplier` (`supplier_id`);
-
---
--- Constraints for table `ims_equipment_not_used`
---
-ALTER TABLE `ims_equipment_not_used`
-  ADD CONSTRAINT `ims_equipment_not_used_ibfk_1` FOREIGN KEY (`EquipmentModel`) REFERENCES `ims_equipment_details` (`EquipmentModel`);
-
---
--- Constraints for table `ims_equipment_used`
---
-ALTER TABLE `ims_equipment_used`
-  ADD CONSTRAINT `ims_equipment_used_ibfk_1` FOREIGN KEY (`EquipmentModel`) REFERENCES `ims_equipment_details` (`EquipmentModel`);
 
 --
 -- Constraints for table `ims_exam`

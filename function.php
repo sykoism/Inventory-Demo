@@ -10,7 +10,7 @@ class Inventory {
 	private $examDetails = 'ims_exam_detail';
 	private $examSeries = 'ims_exam_series';
 	private $staffList = 'ims_staff';
-	private $supplierList = 'ims_supplier';
+	private $supplierTable = 'ims_supplier';
 	private $userTable = 'ims_user';
 	private $dbConnect = false;
 
@@ -62,18 +62,8 @@ class Inventory {
 	}
 
 	public function getSupplierList(){		
-		$sqlQuery = "SELECT * FROM ".$this->supplierList." ";
-		if(!empty($_POST["search"]["value"])){
-			$sqlQuery .= 'WHERE (supplier_name LIKE "%'.$_POST["search"]["value"].'%" ';
-		}
-		if(!empty($_POST["order"])){
-			$sqlQuery .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
-		} else {
-			$sqlQuery .= 'ORDER BY supplier_id DESC ';
-		}
-		if($_POST["length"] != -1){
-			$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
-		}	
+		$sqlQuery = "SELECT * FROM ".$this->supplierTable." ";
+
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
 		$numRows = mysqli_num_rows($result);
 		$supplierData = array();	

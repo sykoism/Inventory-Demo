@@ -20,11 +20,8 @@ $inventory->checkLogin();
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">
-						<div class="col-lg-10 col-md-10 col-sm-8 col-xs-6">
+						<div>
 							<h3 class="panel-title">Manage Supplier</h3>
-						</div>
-						<div class="col-lg-2 col-md-2 col-sm-4 col-xs-6" align="right">
-							<button type="button" name="add" id="addSupplier" data-toggle="modal" data-target="#userModal" class="btn btn-success btn-xs">Add</button>
 						</div>
 					</div>					   
 					<div class="clear:both"></div>
@@ -37,7 +34,7 @@ $inventory->checkLogin();
 									<tr>
 										<th>ID</th>										
 										<th>Name</th>
-										<th>salesperson</th>
+										<th>Salesperson</th>
 										<th>Mobile</th>
 										<th>Status</th>	
 									</tr>
@@ -49,9 +46,7 @@ $inventory->checkLogin();
 			</div>
 		</div>	
 	</div>	
-</div>
-
-		
+</div>	
 	
 
 <?php include('inc/footer.php');?>

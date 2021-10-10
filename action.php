@@ -9,6 +9,18 @@ if(!empty($_GET['action']) && $_GET['action'] == 'logout') {
 	header("Location:index.php");
 }
 
-if(!empty($_POST['action']) && $_POST['action'] == 'supplierList') {
+if(!empty($_POST['action']) && $_POST['action'] == 'getSupplierList') {
 	$inventory->getSupplierList();
+}
+
+if(!empty($_POST['action']) && $_POST['action'] == 'listSpec') {
+	$inventory->getSpecList();
+}
+
+if(!empty($_POST['action']) && $_POST['action'] == 'getInventoryList') {
+	$inventory->getInventoryList();
+}
+
+if(!empty($_POST['action']) && $_POST['action'] == 'getExpireList') {
+	$inventory->getExpireList();
 }

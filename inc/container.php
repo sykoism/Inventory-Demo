@@ -18,7 +18,7 @@
           <a class="nav-link" href="EditExam.php">Previous Exam</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Sales.php">Sales Contact</a>
+          <a class="nav-link" href="sales.php">Sales Contact</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="AddInventory.php">Add Inventory</a>
@@ -28,6 +28,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="InventoryExpire.php">Inventory Nearly Expired</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="productinfo.php">Product Spec</a>
         </li>
       </ul>
       

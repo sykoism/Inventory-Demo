@@ -8,8 +8,6 @@ $inventory->checkLogin();
 
 <script src="js/sales.js"></script>
 
-<link href="css/datatables.min.css" rel="stylesheet">
-<script src="js/datatables.min.js"></script>
 
 <?php include('inc/container.php');?>
 
@@ -21,7 +19,7 @@ $inventory->checkLogin();
 				<div class="panel-heading">
 					<div class="row">
 						<div>
-							<h3 class="panel-title">Manage Supplier</h3>
+							<h3 class="panel-title">Sales Contact</h3>
 						</div>
 					</div>					   
 					<div class="clear:both"></div>

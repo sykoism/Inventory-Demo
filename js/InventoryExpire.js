@@ -1,37 +1,24 @@
-var minDate, maxDate;
- 
-// Custom filtering function which will search data in column four between two values
-$.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-        var min = minDate.val();
-        var max = maxDate.val();
-        var date = new Date( data[4] );
- 
-        if (
-            ( min === null && max === null ) ||
-            ( min === null && date <= max ) ||
-            ( min <= date   && max === null ) ||
-            ( min <= date   && date <= max )
-        ) {
-            return true;
-        }
-        return false;
-    }
-);
-
 $(document).ready(function() {
 	var url = window.location.pathname.split("/").pop();
 
-	// Create date inputs
-	minDate = new DateTime($('#min'), {
-		format: 'YYYY-MM-DD'
-	});
-	maxDate = new DateTime($('#max'), {
-		format: 'YYYY-MM-DD'
+	new DateTime(document.getElementById('min'), {
+        buttons: {
+            today: true,
+            clear: true
+		}
 	});
 
+	new DateTime(document.getElementById('max'), {
+        buttons: {
+            today: true,
+            clear: true	
+		}	
+	});
+
+
+
 	// Table with ajax
-	var supplierDataTable = $('#expireList').DataTable({
+	var expiryDataTable = $('#expireList').DataTable({
 		"processing": true,
 		"serverSide": true,
 		"order": [ 0, 'asc' ],
@@ -39,7 +26,8 @@ $(document).ready(function() {
 			url:"action.php",
 			type:"POST",
 			data:{action:'getExpireList'}
-		},
-		"pageLength": 10
+		}, 
+		"pageLength": 10,
 	});
+
 } );

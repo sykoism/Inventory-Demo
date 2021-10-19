@@ -6,7 +6,7 @@ $inventory = new Inventory();
 $inventory->checkLogin();
 ?>
 
-<script src="js/productinfo.js"></script>
+<script src="js/PreviousExam.js"></script>
 
 <?php include('inc/container.php');?>
 
@@ -17,20 +17,19 @@ $inventory->checkLogin();
                 <div class="panel-heading">
                 	<div class="row">
                 		<div class="col-md-10">
-                			<h3 class="panel-title">Products Specification</h3>
-                		</div>
-                		<div class="col-md-2" align="right">
-                			<button type="button" name="add" id="addBrand" class="btn btn-success btn-xs">Add</button>
+                			<h3 class="panel-title">List of Previous Exam</h3>
                 		</div>
                 	</div>
                 </div>
                 <div class="panel-body">
-                	<table id="specList" class="table table-bordered table-striped">
+                	<table id="examList" class="table table-bordered table-striped">
                 		<thead>
 							<tr>
-								<th>Equipment Model</th>
-								<th>Equipment Name</th>
-								<th>Equipment Type</th>
+								<th>Exam Date</th>
+								<th>Patient ID</th>
+								<th>Accession Number</th>
+								<th>Patient Name</th>
+								<th>Exam Name</th>
 							</tr>
 						</thead>
                 	</table>

@@ -40,7 +40,12 @@
 			    <div class="form-group">
 				    <button type="submit" name="login" class="btn btn-info">Login</button>
 			    </div>
-			    <p><b>User</b> : admin<br><b>Password</b> : 123</p>	
+			    <div>
+					<br>
+					<p><b>Admin</b> : admin<br><b>Password</b> : 123</p>
+					<br>
+					<p><b>User</b> : user<br><b>Password</b> : 456</p>
+				</div>
 		    </form>
 		    <br>
 	    </div>		

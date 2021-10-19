@@ -13,7 +13,7 @@ if(!empty($_POST['action']) && $_POST['action'] == 'getSupplierList') {
 	$inventory->getSupplierList();
 }
 
-if(!empty($_POST['action']) && $_POST['action'] == 'listSpec') {
+if(!empty($_POST['action']) && $_POST['action'] == 'getSpecList') {
 	$inventory->getSpecList();
 }
 
@@ -23,4 +23,16 @@ if(!empty($_POST['action']) && $_POST['action'] == 'getInventoryList') {
 
 if(!empty($_POST['action']) && $_POST['action'] == 'getExpireList') {
 	$inventory->getExpireList();
+}
+
+if(!empty($_POST['action']) && $_POST['action'] == 'getExamList') {
+	$inventory->getExamList();
+}
+
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'newExamForm') {
+	$inventory->newExamForm();
+}
+
+if(!empty($_POST['action']) && $_POST['action'] == 'getExamInfo') {
+	$inventory->getExamInfo();
 }

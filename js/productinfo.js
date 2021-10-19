@@ -1,22 +1,15 @@
-$(document).ready(function(){
-    var specDataTable = $('#specList').DataTable({
-		"lengthChange": false,
-		"processing":true,
-		"serverSide":true,
-		"order":[],
-		"ajax":{
+$(document).ready(function() {
+	var url = window.location.pathname.split("/").pop();
+
+	var specDataTable = $('#specList').DataTable({
+		"processing": true,
+		"serverSide": true,
+		"order": [ 0, 'asc' ],
+		"ajax": {
 			url:"action.php",
 			type:"POST",
-			data:{action:'listSpec'},
-			dataType:"json"
+			data:{action:'getSpecList'}
 		},
-		"columnDefs":[
-			{
-				"targets":[4, 5],
-				"orderable":false,
-			},
-		],
 		"pageLength": 10
 	});
-
-});
+} );

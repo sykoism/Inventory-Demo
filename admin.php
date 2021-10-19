@@ -8,11 +8,11 @@ $inventory->checkAdmin();
 ?>
 
 
-<?php include('inc/container.php');?>
+<?php include('inc/container_admin.php');?>
 
 
 
-<h2>Under Contruction</h2>
+<h2>Admin Page gets extra function like adding inventory.</h2>
 		
 	
 

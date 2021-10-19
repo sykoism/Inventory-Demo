@@ -7,7 +7,9 @@ $inventory->checkLogin();
 ?>
 
 <script src="js/dataTables.dateTime.min.js"></script>
+<script src="js/moment.min.js"></script>
 <script src="js/InventoryExpire.js"></script>
+<link href="css/dataTables.dateTime.min.css" rel="stylesheet">
 
 
 <?php include('inc/container.php');?>
@@ -27,7 +29,7 @@ $inventory->checkLogin();
 				</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-sm-12 table-responsive">
+
 						<table border="0" cellspacing="5" cellpadding="5">
         				<tbody><tr>
             				<td>Minimum date:</td>
@@ -37,7 +39,10 @@ $inventory->checkLogin();
             				<td>Maximum date:</td>
             				<td><input type="text" id="max" name="max"></td>
         				</tr>
-    					</tbody></table>
+    					</tbody>
+						</table>
+
+						<div class="col-sm-12 table-responsive">
 							<table id="expireList" class="table table-bordered table-striped">
 								<thead>
 									<tr>

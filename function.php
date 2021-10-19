@@ -161,10 +161,20 @@ class Inventory {
 	public function getExpireList(){		
 		$sqlQuery = "SELECT * FROM ".$this->equipment_details." as eqd
 			INNER JOIN ".$this->equipment." as eq ON eq.EquipmentModel = eqd.EquipmentModel ";
+		
+		
+		$sqlQuery .= 'WHERE ExpiryDate < DATE_ADD(NOW(), INTERVAL 3000 DAY) ';
+		if(!empty($_POST["search"]["value"])){
+			$sqlQuery .= 'AND (EquipmentName LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (EquipmentID LIKE "%'.$_POST["search"]["value"].'%") ';			
+		}
+		/*
 		if(!empty($_POST["search"]["value"])){
 			$sqlQuery .= 'WHERE (EquipmentName LIKE "%'.$_POST["search"]["value"].'%") ';
 			$sqlQuery .= 'OR (EquipmentID LIKE "%'.$_POST["search"]["value"].'%") ';			
 		}
+		*/
+
 		if(!empty($_POST["order"])){
 			$ordIndex = $_POST["order"]['0']['column']+1;
 			$sqlQuery .= 'ORDER BY '.$ordIndex.' '.$_POST['order']['0']['dir'].' ';
@@ -193,6 +203,115 @@ class Inventory {
 		);
 		echo json_encode($output);
 	}
-    
+	
+	public function getExamList(){		
+		$sqlQuery = "SELECT * FROM ".$this->examSummary." as esum
+			INNER JOIN ".$this->examSeries." as eser ON esum.ExamID = eser.ExamID ";
+		if(!empty($_POST["search"]["value"])){
+			$sqlQuery .= 'WHERE (PatientID LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (PatientName LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (AccessionNumber LIKE "%'.$_POST["search"]["value"].'%") ';			
+		}
+		if(!empty($_POST["order"])){
+			$ordIndex = $_POST["order"]['0']['column']+1;
+			$sqlQuery .= 'ORDER BY '.$ordIndex.' '.$_POST['order']['0']['dir'].' ';
+		} else {
+			$sqlQuery .= 'ORDER BY ExamDate DESC ';
+		}
+		if($_POST["length"] != -1){
+			$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		$numRows = mysqli_num_rows($result);
+		$inventoryData = array();	
+		while( $inventory = mysqli_fetch_assoc($result) ) {
+			$inventoryRows = array();
+			$inventoryRows[] = $inventory['ExamDate'];		
+			$inventoryRows[] = $inventory['PatientID'];	
+			$inventoryRows[] = $inventory['AccessionNumber'];			
+			$inventoryRows[] = $inventory['PatientName'];	
+			$inventoryRows[] = $inventory['ExamName'];
+			$inventoryData[] = $inventoryRows;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"  	=>  $numRows,
+			"recordsFiltered" 	=> 	$numRows,
+			"data"    			=> 	$inventoryData
+		);
+		echo json_encode($output);
+	}
+
+	public function getSpecList(){		
+		$sqlQuery = "SELECT * FROM ".$this->equipment_details." ";
+		if(!empty($_POST["search"]["value"])){
+			$sqlQuery .= 'WHERE (EquipmentModel LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (EquipmentName LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (EquipmentType LIKE "%'.$_POST["search"]["value"].'%") ';			
+		}
+		if(!empty($_POST["order"])){
+			$ordIndex = $_POST["order"]['0']['column']+1;
+			$sqlQuery .= 'ORDER BY '.$ordIndex.' '.$_POST['order']['0']['dir'].' ';
+		} else {
+			$sqlQuery .= 'ORDER BY EquipmentModel DESC ';
+		}
+		if($_POST["length"] != -1){
+			$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		$numRows = mysqli_num_rows($result);
+		$inventoryData = array();	
+		while( $inventory = mysqli_fetch_assoc($result) ) {
+			$inventoryRows = array();
+			$inventoryRows[] = $inventory['EquipmentModel'];		
+			$inventoryRows[] = $inventory['EquipmentName'];	
+			$inventoryRows[] = $inventory['EquipmentType'];
+			$inventoryData[] = $inventoryRows;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"  	=>  $numRows,
+			"recordsFiltered" 	=> 	$numRows,
+			"data"    			=> 	$inventoryData
+		);
+		echo json_encode($output);
+	}
+
+	public function seriesDropdownList(){	
+		$sqlQuery = "SELECT * FROM ".$this->examSeries." ORDER BY ExamID ASC";
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		$dropdownHTML = '';
+		while( $series = mysqli_fetch_assoc($result) ) {	
+			$dropdownHTML .= '<option value="'.$series["ExamID"].'">'.$series["ExamName"].'</option>';
+		}
+		return $dropdownHTML;
+	}
+
+	public function newExamForm() {
+		$sqlQuery = "SELECT * FROM ".$this->examSummary."
+			WHERE AccessionNumber = '".$_POST['acc_id']."'";
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		if (!is_null($result)){
+			echo '<script>alert("Study already exists!");
+			location="NewExam.php";
+			</script>';
+		} else {
+			$sqlInsert = "
+			INSERT INTO ".$this->examSummary."(PatientID, AccessionNumber, PatientName, ExamID, ExamDate) 
+			VALUES ('".$_POST['pat_id']."', '".$_POST['acc_id']."', '".$_POST['name']."''".$_POST['examID']."')";		
+			mysqli_query($this->dbConnect, $sqlInsert);
+			header('Location: EditExam.php?acc_id='.$_POST['acc_id']);
+		}
+	}		
+
+	public function getExamInfo(){		
+		$sqlQuery = "SELECT * FROM ".$this->examSummary." as esum
+			LEFT JOIN ".$this->examDetails." as eDe ON esum.AccessionNumber = eDe.AccessionNumber 
+			INNER JOIN ".$this->examSeries." as eSer ON esum.ExamID = eSer.ExamID 
+			WHERE esum.AccessionNumber = '".$_POST['acc_num']."'";
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		echo json_encode($row);
+	}
 }
 ?>

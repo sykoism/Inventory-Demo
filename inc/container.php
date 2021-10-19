@@ -12,16 +12,10 @@
           <a class="nav-link" href="NewExam.php">New Exam</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="CurrentExam.php">Current Exam</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="EditExam.php">Previous Exam</a>
+          <a class="nav-link" href="PreviousExam.php">Previous Exam</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="sales.php">Sales Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="AddInventory.php">Add Inventory</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="ManageInventory.php">Manage Inventory</a>
@@ -40,6 +34,7 @@
           <?php echo $_SESSION['username']; ?>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="admin.php">AdminPage</a></li>
             <li><a class="dropdown-item" href="action.php?action=logout">Logout</a></li>
           </ul>
         </li>

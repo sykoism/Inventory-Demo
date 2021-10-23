@@ -163,7 +163,7 @@ class Inventory {
 			INNER JOIN ".$this->equipment." as eq ON eq.EquipmentModel = eqd.EquipmentModel ";
 		
 		
-		$sqlQuery .= 'WHERE ExpiryDate < DATE_ADD(NOW(), INTERVAL 3000 DAY) ';
+		$sqlQuery .= 'WHERE ExpiryDate < DATE_ADD(NOW(), INTERVAL '.$_POST["expireDay"].' DAY) ';
 		if(!empty($_POST["search"]["value"])){
 			$sqlQuery .= 'AND (EquipmentName LIKE "%'.$_POST["search"]["value"].'%") ';
 			$sqlQuery .= 'OR (EquipmentID LIKE "%'.$_POST["search"]["value"].'%") ';			
@@ -296,10 +296,14 @@ class Inventory {
 			location="NewExam.php";
 			</script>';
 		} else {
-			$sqlInsert = "
+			$sqlInsert1 = "
 			INSERT INTO ".$this->examSummary."(PatientID, AccessionNumber, PatientName, ExamID, ExamDate) 
 			VALUES ('".$_POST['pat_id']."', '".$_POST['acc_id']."', '".$_POST['name']."''".$_POST['examID']."')";		
-			mysqli_query($this->dbConnect, $sqlInsert);
+			mysqli_query($this->dbConnect, $sqlInsert1);
+			$sqlInsert2 = "
+			INSERT INTO ".$this->$examDetails."(AccessionNumber) 
+			VALUES ('".$_POST['acc_id']."')";		
+			mysqli_query($this->dbConnect, $sqlInsert2);
 			header('Location: EditExam.php?acc_id='.$_POST['acc_id']);
 		}
 	}		
@@ -313,5 +317,13 @@ class Inventory {
 		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		echo json_encode($row);
 	}
+
+	public function updateExamInfo() {
+		$sqlQuery = "
+			INSERT INTO ".$this->examSummary."(PatientID, AccessionNumber, PatientName, ExamID, ExamDate) 
+			VALUES ('".$_POST['pat_id']."', '".$_POST['acc_id']."', '".$_POST['name']."''".$_POST['examID']."')";		
+			mysqli_query($this->dbConnect, $sqlQuery);
+		}
+	
 }
 ?>

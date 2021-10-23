@@ -28,17 +28,17 @@ $inventory->checkLogin();
 					<div class="clear:both"></div>
 				</div>
 				<div class="panel-body">
-					<div class="row">
-
+					<div class="container">
 						<table border="0" cellspacing="5" cellpadding="5">
-        				<tbody><tr>
-            				<td>Minimum date:</td>
-            				<td><input type="text" id="min" name="min"></td>
-        				</tr>
-        				<tr>
-            				<td>Maximum date:</td>
-            				<td><input type="text" id="max" name="max"></td>
-        				</tr>
+        				<tbody>
+						<label for="date">Expired within&nbsp;</label>
+						<select id="dateDropDownList" >  
+       						<option value="30">30</option>  
+       						<option value="40">40</option>  
+       						<option value="50">50</option>  
+       						<option value="3000">3000</option>  
+						</select>   
+						<label for="date">&nbsp;days.</label>
     					</tbody>
 						</table>
 

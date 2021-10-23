@@ -48,15 +48,15 @@ $inventory->checkLogin();
 						</div>
                         <div class="form-group">
                         <label>Radiographer</label>
-						<input type="text" name="pher" id="pher" class="form-control" required />
+						<input type="text" name="pher" id="pher" class="form-control"/>
                         </div>
                         <div class="form-group">
                         <label>Radiologist</label>
-						<input type="text" name="gist" id="gist" class="form-control" required />
+						<input type="text" name="gist" id="gist" class="form-control"/>
                         </div>
                         <div class="form-group">
                         <label>Nurse</label>
-						<input type="text" name="nurse" id="nurse" class="form-control" required />
+						<input type="text" name="nurse" id="nurse" class="form-control"/>
                         </div>
     				</div>
     				<div class="modal-footer">

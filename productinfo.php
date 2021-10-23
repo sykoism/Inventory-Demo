@@ -19,9 +19,6 @@ $inventory->checkLogin();
                 		<div class="col-md-10">
                 			<h3 class="panel-title">Products Specification</h3>
                 		</div>
-                		<div class="col-md-2" align="right">
-                			<button type="button" name="add" id="addBrand" class="btn btn-success btn-xs">Add</button>
-                		</div>
                 	</div>
                 </div>
                 <div class="panel-body">

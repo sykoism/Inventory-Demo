@@ -12,7 +12,7 @@ $inventory->checkAdmin();
 
 
 
-<h2>Admin Page gets extra function like adding inventory.</h2>
+<h2>Admin Page gets functions like adding inventory.</h2>
 		
 	
 

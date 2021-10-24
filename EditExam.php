@@ -24,12 +24,12 @@ $inventory->checkLogin();
 					</div>					   
 					<div class="clear:both"></div>
 				</div>
-                <form method="post" id="newExamForm">
+                <form method="post" id="updateExamInfo">
     			<div class="modal-content">
     				<div class="modal-body">
                         <div class="form-group">
     					<label>Accession Number</label>
-						<input type="text" name="acc_num" id="acc_num" class="form-control" required />
+						<input type="text" name="acc_num" id="acc_num" class="form-control" readonly />
                         </div>
                         <div class="form-group">
                         <label>Patient ID</label>
@@ -61,13 +61,14 @@ $inventory->checkLogin();
     				</div>
     				<div class="modal-footer">
                         <!--
-    					<input type="hidden" name="categoryId" id="categoryId"/>
-    					<input type="hidden" name="btn_action" id="btn_action"/>-->
-    					<input type="submit" name="action" id="action" class="btn btn-info" value="Save" />
+    					<input type="hidden" name="categoryId" id="categoryId"/>-->
+    					<input type="hidden" name="btn_action" id="btn_action" value="updateExamInfo"/>
+    					<input type="submit" value="Save" />
                         <!--
     					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
     				</div>
     			</div>
+				<br>
     		    </form>
 					<button id="addRow">Add new row</button>
     					<table id="example" class="table table-striped table-bordered" style="width:100%">

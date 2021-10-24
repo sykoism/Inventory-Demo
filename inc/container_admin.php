@@ -9,16 +9,16 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="NewExam.php">New Exam</a>
+          <a class="nav-link" href="#">Inventory Arrival</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="PreviousExam.php">Previous Exam</a>
+          <a class="nav-link" href="#">Manage Staff</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="sales.php">Sales Contact</a>
+          <a class="nav-link" href="#">Manage Sales</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="AddInventory.php">Add Inventory</a>
+          <a class="nav-link" href="#">Add Inventory</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="ManageInventory.php">Manage Inventory</a>

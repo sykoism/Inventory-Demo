@@ -12,6 +12,7 @@ class Inventory {
 	private $staffList = 'ims_staff';
 	private $supplierTable = 'ims_supplier';
 	private $userTable = 'ims_user';
+	private $userTable_hash = 'ims_user_hash';
 	private $dbConnect = false;
 
     //sql connect
@@ -46,6 +47,10 @@ class Inventory {
 		return $numRows;
 	}
 
+	private function phpAlert($msg) {
+		echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+	}
+
 	public function login($userid, $password){
 		$password = md5($password);
 		$sqlQuery = "
@@ -73,6 +78,7 @@ class Inventory {
 			$admin = true;
 		    return $admin;
 	    } else {
+			$this->phpAlert("This page is for administrator only!");
 		    header("Location:index.php");
 	    }
 	}
@@ -282,7 +288,7 @@ class Inventory {
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
 		$dropdownHTML = '';
 		while( $series = mysqli_fetch_assoc($result) ) {	
-			$dropdownHTML .= '<option value="'.$series["ExamID"].'">'.$series["ExamName"].'</option>';
+			$dropdownHTML .= '<option value="'.$series["ExamID"].'">'.$series["ExamID"].' '.$series["ExamName"].'</option>';
 		}
 		return $dropdownHTML;
 	}
@@ -319,11 +325,16 @@ class Inventory {
 	}
 
 	public function updateExamInfo() {
-		$sqlQuery = "
-			INSERT INTO ".$this->examSummary."(PatientID, AccessionNumber, PatientName, ExamID, ExamDate) 
-			VALUES ('".$_POST['pat_id']."', '".$_POST['acc_id']."', '".$_POST['name']."''".$_POST['examID']."')";		
-			mysqli_query($this->dbConnect, $sqlQuery);
-		}
+		$sqlUpdate1 = "
+			UPDATE ".$this->examSummary." SET PatientID = '".$_POST['pat_id']."', PatientName = '".$_POST['name']."', ExamID = '".$_POST['examID']."'
+			WHERE AccessionNumber = '".$_POST['acc_num']."'";	
+		$sqlUpdate2 = "
+			UPDATE ".$this->examDetails." SET Radiologist = '".$_POST['gist']."', Radiographer = '".$_POST['pher']."', Nurse = '".$_POST['nurse']."'
+			WHERE AccessionNumber = '".$_POST['acc_num']."'";		
+		mysqli_query($this->dbConnect, $sqlUpdate1);
+		mysqli_query($this->dbConnect, $sqlUpdate2);
+	}
 	
+
 }
 ?>

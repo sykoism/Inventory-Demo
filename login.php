@@ -6,7 +6,7 @@
       if (!empty($_POST['userid']) && !empty($_POST['pwd'])) {
 	      include 'function.php';
 	      $inventory = new Inventory();
-	      $login = $inventory->login($_POST['userid'], $_POST['pwd']); 
+	      $login = $inventory->loginNew($_POST['userid'], $_POST['pwd']); 
 	    if(!empty($login)) {
 		    $_SESSION['username'] = $login[0]['username'];
 		    $_SESSION['userid'] = $login[0]['userid'];			

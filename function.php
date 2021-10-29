@@ -30,7 +30,7 @@ class Inventory {
 	private function getData($sqlQuery) {
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
 		if(!$result){
-			die('Error in query: '. mysqli_error());
+			die('Error in query: '. mysqli_error($this->dbConnect));
 		}
 		$data= array();
 		while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -58,6 +58,20 @@ class Inventory {
 			FROM ".$this->userTable." 
 			WHERE userid='".$userid."' AND password='".$password."'";
         return  $this->getData($sqlQuery);
+	}
+
+	public function loginNew($userid, $password){
+		$sqlQuery = "
+			SELECT userid, username, password, type, status
+			FROM ".$this->userTable_hash." 
+			WHERE userid='".$userid."'";
+		$result = $this->getData($sqlQuery);
+		if (empty($result)){
+			$this->phpAlert('Error!');
+		}
+			elseif (password_verify($password, $result[0]["password"])){
+				return $result;
+			}
 	}
 
 	public function checkLogin(){

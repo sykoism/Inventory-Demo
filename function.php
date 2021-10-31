@@ -13,6 +13,7 @@ class Inventory {
 	private $supplierTable = 'ims_supplier';
 	private $userTable = 'ims_user';
 	private $userTable_hash = 'ims_user_hash';
+	private $staffTable = 'ims_staff';
 	private $dbConnect = false;
 
     //sql connect
@@ -38,6 +39,7 @@ class Inventory {
 		}
 		return $data;
 	}
+
 	private function getNumRows($sqlQuery) {
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
 		if(!$result){
@@ -349,6 +351,42 @@ class Inventory {
 		mysqli_query($this->dbConnect, $sqlUpdate2);
 	}
 	
+	public function getStaffList(){		
+		$sqlQuery = "SELECT * FROM ".$this->staffTable." ";
+		if(!empty($_POST["search"]["value"])){
+			$sqlQuery .= 'WHERE (staff_init LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (staff_name LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (staff_type LIKE "%'.$_POST["search"]["value"].'%") ';				
+		}
+		if(!empty($_POST["order"])){
+			$ordIndex = $_POST["order"]['0']['column']+1;
+			$sqlQuery .= 'ORDER BY '.$ordIndex.' '.$_POST['order']['0']['dir'].' ';
+		} else {
+			$sqlQuery .= 'ORDER BY staff_name DESC ';
+		}
+		if($_POST["length"] != -1){
+			$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		$numRows = mysqli_num_rows($result);
+		$supplierData = array();	
+		while( $supplier = mysqli_fetch_assoc($result) ) {
+			$supplierRows = array();
+			$supplierRows[] = $supplier['staff_init'];		
+			$supplierRows[] = $supplier['staff_name'];	
+			$supplierRows[] = $supplier['staff_type'];
+			$supplierRows[] = '<button type="button" name="update" id="'.$supplier["staff_init"].'" class="btn btn-warning btn-xs update">Update</button>';
+			$supplierRows[] = '<button type="button" name="delete" id="'.$supplier["staff_init"].'" class="btn btn-danger btn-xs delete" >Delete</button>';
+			$supplierData[] = $supplierRows;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"  	=>  $numRows,
+			"recordsFiltered" 	=> 	$numRows,
+			"data"    			=> 	$supplierData
+		);
+		echo json_encode($output);
+	}
 
 }
 ?>

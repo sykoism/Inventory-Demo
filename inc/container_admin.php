@@ -12,22 +12,10 @@
           <a class="nav-link" href="#">Inventory Arrival</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Manage Staff</a>
+          <a class="nav-link" href="staff.php">Manage Staff</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Manage Sales</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Add Inventory</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="ManageInventory.php">Manage Inventory</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="InventoryExpire.php">Inventory Nearly Expired</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="productinfo.php">Product Spec</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="LowInventory.php">Threshold of "Low" Inventory</a>

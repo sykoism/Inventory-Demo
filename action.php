@@ -40,3 +40,8 @@ if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'updateExamInfo') {
 if(!empty($_POST['action']) && $_POST['action'] == 'getExamInfo') {
 	$inventory->getExamInfo();
 }
+
+if(!empty($_POST['action']) && $_POST['action'] == 'getStaffList') {
+	$inventory->getStaffList();
+}
+

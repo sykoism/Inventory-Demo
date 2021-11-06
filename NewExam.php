@@ -50,7 +50,7 @@ $inventory->checkLogin();
     				<div class="modal-footer">
                         <!--
     					<input type="hidden" name="categoryId" id="categoryId"/>-->
-    					<input type="hidden" name="btn_action" id="btn_action" value="newExamForm"/>
+    					<input type="hidden" name="btn_action" id="btn_action" value="addNewExam"/>
     					<input type="submit" value="Add" />
                         <!--
     					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->

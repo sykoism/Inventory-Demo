@@ -15,7 +15,7 @@ $(document).ready(function() {
             $('#gist').val(data.Radiologist);
             $('#nurse').val(data.Nurse);
             $('#action').val("Save");
-            $('#btn_action').val("updateExam");
+            $('#btn_action').val("updateExamInfo");
         }
     })
 

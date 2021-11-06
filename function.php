@@ -98,7 +98,8 @@ class Inventory {
 		    header("Location:index.php");
 	    }
 	}
-
+	
+	//sales
 	public function getSupplierList(){		
 		$sqlQuery = "SELECT * FROM ".$this->supplierTable." ";
 		if(!empty($_POST["search"]["value"])){
@@ -141,7 +142,7 @@ class Inventory {
 		echo json_encode($output);
 	}
 
-	
+	//inventory list
 	public function getInventoryList(){		
 		$sqlQuery = "SELECT * FROM ".$this->equipment_details." as eqd
 			INNER JOIN ".$this->equipment." as eq ON eq.EquipmentModel = eqd.EquipmentModel 
@@ -180,6 +181,7 @@ class Inventory {
 		echo json_encode($output);
 	}
 
+	//inventory nearly expired
 	public function getExpireList(){		
 		$sqlQuery = "SELECT * FROM ".$this->equipment_details." as eqd
 			INNER JOIN ".$this->equipment." as eq ON eq.EquipmentModel = eqd.EquipmentModel ";
@@ -226,6 +228,7 @@ class Inventory {
 		echo json_encode($output);
 	}
 	
+	//exam info
 	public function getExamList(){		
 		$sqlQuery = "SELECT * FROM ".$this->examSummary." as esum
 			INNER JOIN ".$this->examSeries." as eser ON esum.ExamID = eser.ExamID ";
@@ -264,6 +267,7 @@ class Inventory {
 		echo json_encode($output);
 	}
 
+	//product spec
 	public function getSpecList(){		
 		$sqlQuery = "SELECT * FROM ".$this->equipment_details." ";
 		if(!empty($_POST["search"]["value"])){
@@ -309,6 +313,7 @@ class Inventory {
 		return $dropdownHTML;
 	}
 
+	//new exam
 	public function newExamForm() {
 		$sqlQuery = "SELECT * FROM ".$this->examSummary."
 			WHERE AccessionNumber = '".$_POST['acc_id']."'";
@@ -387,6 +392,24 @@ class Inventory {
 		);
 		echo json_encode($output);
 	}
+
+
+/*	public function updateProduct() {		
+		if($_POST['pid']) {	
+			$sqlUpdate = "UPDATE ".$this->productTable." 
+				SET categoryid = '".$_POST['categoryid']."', brandid='".$_POST['brandid']."', pname='".$_POST['pname']."', model='".$_POST['pmodel']."', description='".$_POST['description']."', quantity='".$_POST['quantity']."', unit='".$_POST['unit']."', base_price='".$_POST['base_price']."', tax='".$_POST['tax']."', supplier='".$_POST['supplierid']."' WHERE pid = '".$_POST["pid"]."'";			
+			mysqli_query($this->dbConnect, $sqlUpdate);	
+			echo 'Product Update';
+		}	
+	}	
+	public function addProduct() {		
+		$sqlInsert = "
+			INSERT INTO ".$this->productTable."(categoryid, brandid, pname, model, description, quantity, unit, base_price, tax, minimum_order, supplier) 
+			VALUES ('".$_POST["categoryid"]."', '".$_POST['brandid']."', '".$_POST['pname']."', '".$_POST['pmodel']."', '".$_POST['description']."', '".$_POST['quantity']."', '".$_POST['unit']."', '".$_POST['base_price']."', '".$_POST['tax']."', 1, '".$_POST['supplierid']."')";		
+		mysqli_query($this->dbConnect, $sqlInsert);
+		echo 'New Product Added';
+	}	
+*/
 
 }
 ?>

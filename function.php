@@ -314,24 +314,23 @@ class Inventory {
 	}
 
 	//new exam
-	public function newExamForm() {
+	public function addNewExam() {
 		$sqlQuery = "SELECT * FROM ".$this->examSummary."
 			WHERE AccessionNumber = '".$_POST['acc_id']."'";
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
-		if (!is_null($result)){
+		if (mysqli_num_rows($result) != 0){
 			echo '<script>alert("Study already exists!");
 			location="NewExam.php";
 			</script>';
 		} else {
 			$sqlInsert1 = "
-			INSERT INTO ".$this->examSummary."(PatientID, AccessionNumber, PatientName, ExamID, ExamDate) 
+			INSERT INTO ".$this->examSummary."(PatientID, AccessionNumber, PatientName, ExamID) 
 			VALUES ('".$_POST['pat_id']."', '".$_POST['acc_id']."', '".$_POST['name']."''".$_POST['examID']."')";		
 			mysqli_query($this->dbConnect, $sqlInsert1);
 			$sqlInsert2 = "
-			INSERT INTO ".$this->$examDetails."(AccessionNumber) 
+			INSERT INTO ".$this->examDetails."(AccessionNumber) 
 			VALUES ('".$_POST['acc_id']."')";		
 			mysqli_query($this->dbConnect, $sqlInsert2);
-			header('Location: EditExam.php?acc_id='.$_POST['acc_id']);
 		}
 	}		
 

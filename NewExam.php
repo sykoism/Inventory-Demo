@@ -24,7 +24,7 @@ $inventory->checkLogin();
 					</div>					   
 					<div class="clear:both"></div>
 				</div>
-                <form method="post" action="/action.php" id="newExamForm">
+                <form method="post" id="newExamForm">
     			<div class="modal-content">
     				<div class="modal-body">
                         <div class="form-group">
@@ -51,7 +51,7 @@ $inventory->checkLogin();
                         <!--
     					<input type="hidden" name="categoryId" id="categoryId"/>-->
     					<input type="hidden" name="btn_action" id="btn_action" value="addNewExam"/>
-    					<input type="submit" value="Add" />
+    					<input type="submit" name="action" id="action" class="btn btn-info" value="Add" />
                         <!--
     					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
     				</div>

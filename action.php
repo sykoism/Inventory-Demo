@@ -29,8 +29,8 @@ if(!empty($_POST['action']) && $_POST['action'] == 'getExamList') {
 	$inventory->getExamList();
 }
 
-if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'newExamForm') {
-	$inventory->newExamForm();
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'addNewExam') {
+	$inventory->addNewExam();
 }
 
 if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'updateExamInfo') {

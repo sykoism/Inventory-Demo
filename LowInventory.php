@@ -7,9 +7,9 @@ $inventory->checkLogin();
 $inventory->checkAdmin();
 ?>
 
-<script src="js/staff.js"></script>
 
 <?php include('inc/container_admin.php');?>
+
 
 
 <div class="container">		
@@ -19,7 +19,7 @@ $inventory->checkAdmin();
 				<div class="panel-heading">
 					<div class="row">
 						<div>
-							<h3 class="panel-title">Sales Contact</h3>
+							<h3 class="panel-title">You may set threshold here so that number of inventory appears <span style="color:#ff0000;"> RED </span> when lower than specific threshold.</h3>
 						</div>
 					</div>					   
 					<div class="clear:both"></div>
@@ -30,11 +30,8 @@ $inventory->checkAdmin();
 							<table id="staffList" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>CorpID</th>										
-										<th>Name</th>
-										<th>Post</th>
-										<th>Modify</th>
-                                        <th>Delete</th>
+										<th>Inventory Name</th>										
+										<th>Threshold</th>
 									</tr>
 								</thead>
 							</table>
@@ -44,7 +41,8 @@ $inventory->checkAdmin();
 			</div>
 		</div>	
 	</div>	
-</div>	
+</div>
+		
 	
 
 <?php include('inc/footer.php');?>

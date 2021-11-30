@@ -1,7 +1,11 @@
 $(document).ready(function() {
+    //get accession number in URL
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('acc_id');
+
+    //return accession number to form
     document.getElementById('acc_num').value = myParam;
+    
     $.ajax({
         url:"action.php",
         method:"POST",
@@ -18,6 +22,26 @@ $(document).ready(function() {
             $('#btn_action').val("updateExamInfo");
         }
     })
+
+    $(document).on('submit', '#currentExamInfo', function(event){
+        event.preventDefault();
+        //set action's attribute to disabled
+        $('#action').attr('disabled', 'disabled');
+        var formData = $(this).serialize();
+        $.ajax({
+            url:"action.php",
+            method:"POST",
+            data:formData,
+            success:function(data) {
+                $('#currentExamInfo')[0].reset();
+                $('#action').attr('disabled', false);
+                window.location.reload();
+            },
+            error: function (XMLHttpRequest) {
+                console.log(XMLHttpRequest.responseText);
+            }
+        })
+    });
 
     //auto add rows for inventory
     var t = $('#example').DataTable({

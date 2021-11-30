@@ -18,7 +18,7 @@
           <a class="nav-link" href="sales.php">Sales Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="ManageInventory.php">Manage Inventory</a>
+          <a class="nav-link" href="ManageInventory.php">Inventory Overview</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="InventoryExpire.php">Inventory Nearly Expired</a>

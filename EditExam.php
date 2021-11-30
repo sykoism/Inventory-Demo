@@ -24,7 +24,7 @@ $inventory->checkLogin();
 					</div>					   
 					<div class="clear:both"></div>
 				</div>
-                <form method="post" id="updateExamInfo">
+                <form method="post" id="currentExamInfo">
     			<div class="modal-content">
     				<div class="modal-body">
                         <div class="form-group">

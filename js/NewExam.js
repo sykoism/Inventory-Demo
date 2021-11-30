@@ -19,6 +19,9 @@ $(document).ready(function(){
                 $('#action').attr('disabled', false);
                 //alert('New Study created successfully.');
                 //$(location).prop('href', 'EditExam.php?acc_id=');
+            },    
+            error: function (XMLHttpRequest) {
+                console.log(XMLHttpRequest.responseText);
             }
         })
     });

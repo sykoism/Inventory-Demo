@@ -33,6 +33,10 @@ if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'addNewExam') {
 	$inventory->addNewExam();
 }
 
+if(!empty($_GET['btn_action']) && $_GET['btn_action'] == 'addNewExam') {
+	$inventory->addNewExam();
+}
+
 if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'updateExamInfo') {
 	$inventory->updateExamInfo();
 }
@@ -45,3 +49,6 @@ if(!empty($_POST['action']) && $_POST['action'] == 'getStaffList') {
 	$inventory->getStaffList();
 }
 
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'updateExamInfo') {
+	$inventory->updateExamInfo();
+}

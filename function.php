@@ -319,17 +319,16 @@ class Inventory {
 			WHERE AccessionNumber = '".$_POST['acc_id']."'";
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
 		if (mysqli_num_rows($result) != 0){
-			echo '<script>alert("Study already exists!");
-			location="NewExam.php";
-			</script>';
+			die('Study already exists!');
 		} else {
+			//INSERT INTO `ims_exam`(`PatientID`, `AccessionNumber`, `PatientName`, `ExamID`) VALUES ('value1','value2','value3','value4')
 			$sqlInsert1 = "
 			INSERT INTO ".$this->examSummary."(PatientID, AccessionNumber, PatientName, ExamID) 
-			VALUES ('".$_POST['pat_id']."', '".$_POST['acc_id']."', '".$_POST['name']."''".$_POST['examID']."')";		
+			VALUES ('".$_POST['pat_id']."', '".$_POST['acc_id']."', '".$_POST['name']."', '".$_POST['examID']."')";		
 			mysqli_query($this->dbConnect, $sqlInsert1);
 			$sqlInsert2 = "
 			INSERT INTO ".$this->examDetails."(AccessionNumber) 
-			VALUES ('".$_POST['acc_id']."')";		
+			VALUES ('".$_POST['acc_id']."')";
 			mysqli_query($this->dbConnect, $sqlInsert2);
 		}
 	}		

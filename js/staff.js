@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 	var url = window.location.pathname.split("/").pop();
 
 	var staffDataTable = $('#staffList').DataTable({
@@ -15,30 +16,22 @@ $(document).ready(function() {
 
 	//get staff info when clicking 'update'
 	$(document).on('click', '.update', function(){
-        var pid = $(this).attr("id");
-        var btn_action = 'getProductDetails';
+        var sid = $(this).attr("id");
+        var btn_action = 'getStaffDetail';
         $.ajax({
             url:"action.php",
             method:"POST",
-            data:{pid:pid, btn_action:btn_action},
+            data:{sid:sid, btn_action:btn_action},
             dataType:"json",
             success:function(data){
-                $('#productModal').modal('show');
-                $('#categoryid').val(data.categoryid);
-                $('#brandid').html(data.brand_select_box);
-                $('#brandid').val(data.brandid);
-                $('#pname').val(data.pname);
-				$('#pmodel').val(data.model);
-                $('#description').val(data.description);
-                $('#quantity').val(data.quantity);
-                $('#unit').val(data.unit);
-                $('#base_price').val(data.base_price);
-                $('#tax').val(data.tax);
-				$('#supplierid').val(data.supplier);
-                $('.modal-title').html("<i class='fa fa-pencil-square-o'></i> Edit Product");
-                $('#pid').val(pid);
+                $('#staffModal').modal('show');
+                $('#staff_name').val(data.staff_name);
+                $('#staff_init').val(data.staff_init);
+                $('#staff_type').html(data.staff_select_box);
+                $('.modal-title').html("<i class='fa fa-pencil-square-o'></i> Edit Staff");
+                $('#sid').val(sid);
                 $('#action').val("Edit");
-                $('#btn_action').val("updateProduct");
+                $('#btn_action').val("updateStaff");
             }
         })
     });
@@ -90,5 +83,12 @@ $(document).ready(function() {
         })
     });
 
+/*    var myModal = new bootstrap.Modal(document.getElementById('myModal'), options)
+    $(document).on('keyup',function(evt) {
+        if (evt.keyCode == 27) {
+            myModal.hide();
+        }   
+      });
+*/
 
 } );

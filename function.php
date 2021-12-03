@@ -409,5 +409,30 @@ class Inventory {
 	}	
 */
 
+	public function getStaffDetail() {
+		$sqlQuery = "
+			SELECT * FROM ".$this->staffList." 
+			WHERE staff_init = '".$_POST["sid"]."'";
+		$result = mysqli_query($this->dbConnect, $sqlQuery);			
+		while( $product = mysqli_fetch_assoc($result)) {
+			$output['staff_init'] = $product['staff_init'];
+			$output['staff_name'] = $product['staff_name'];
+			$output['staff_type'] = $product['staff_type'];
+			//$this->getStaffType($product['staff_type']);
+		}
+		echo json_encode($output);
+	}
+
+	public function staffTypeDropdownList(){	
+		$sqlQuery = "SELECT * FROM ".$this->staffList." 
+			ORDER BY type ASC";
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		$dropdownHTML = '';
+		while( $staff = mysqli_fetch_assoc($result) ) {	
+			$dropdownHTML .= '<option value="'.$staff["id"].'">'.$staff["type"].'</option>';
+		}
+		return $dropdownHTML;
+	}
+	
 }
 ?>

@@ -68,4 +68,19 @@ $(document).ready(function() {
     // Automatically add a first row of data
     $('#addRow').click();
 
+    //enter the barcode, and then show the data of equipment
+    /*$(document).on('change', '#categoryid', function(){	
+        var categoryid = $('#categoryid').val();		
+        var btn_action = 'getCategoryBrand';
+        $.ajax({
+            url:"action.php",
+            method:"POST",
+            data:{categoryid:categoryid, btn_action:btn_action},
+            success:function(data) {				
+                $('#brandid').html(data);
+            }
+        });
+    });
+    */
+
 } );

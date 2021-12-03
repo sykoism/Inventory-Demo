@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!--JQuery JS-->
+    <script src="js/jquery-3.3.1.min.js" ></script>
+
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
 	  <!-- Bootstrap JS -->
     <script src="js/bootstrap.bundle.min.js"></script>
-
-    <!--JQuery JS-->
-    <script src="js/jquery-3.3.1.min.js" ></script>
 
     <!--DataTable CSS-->
     <link href="css/datatables.min.css" rel="stylesheet">

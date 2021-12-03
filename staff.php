@@ -43,8 +43,45 @@ $inventory->checkAdmin();
 				</div>
 			</div>
 		</div>	
-	</div>	
-</div>	
+	</div>
 	
+	<div id="staffModal" class="modal fade">
+            <div class="modal-dialog">
+                <form method="post" id="editForm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+							<h4 class="modal-title">Modal title</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+						<div class="modal-body">
+							<div class="form-group">
+                                <label>Staff Name</label>
+                                <input type="text" name="sname" id="sname" class="form-control" required />
+                            </div>
+							<div class="form-group">
+                                <label>CorpID</label>
+                                <input type="text" name="sid" id="sid" class="form-control" required />
+                            </div>
+							<div class="form-group">
+                                <label>Select Post</label>
+                                <select name="stype" id="stype" class="form-control" required>
+                                    <?php echo $inventory->staffTypeDropdownList();?>
+                                </select>
+                            </div>
+						</div>
+						<div class="modal-footer">
+                            <input type="hidden" name="pid" id="pid" />
+                            <input type="hidden" name="btn_action" id="btn_action" />
+                            <input type="submit" name="action" id="action" class="btn btn-info" value="Add" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+					</div>
+				</form>
+			</div>
+	</div>
+								
+</div>	
+
+
 
 <?php include('inc/footer.php');?>

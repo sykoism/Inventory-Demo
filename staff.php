@@ -33,8 +33,9 @@ $inventory->checkAdmin();
 										<th>CorpID</th>										
 										<th>Name</th>
 										<th>Post</th>
+										<th>Status</th>
 										<th>Modify</th>
-                                        <th>Delete</th>
+                                        <th>Activate/Inactivate</th>
 									</tr>
 								</thead>
 							</table>
@@ -45,6 +46,7 @@ $inventory->checkAdmin();
 		</div>	
 	</div>
 	
+	<!-- Modal -->
 	<div id="staffModal" class="modal fade">
             <div class="modal-dialog">
                 <form method="post" id="editForm">
@@ -62,10 +64,11 @@ $inventory->checkAdmin();
                                 <label>CorpID</label>
                                 <input type="text" name="sid" id="sid" class="form-control" required />
                             </div>
-							<div class="form-group">
-                                <label>Select Post</label>
-                                <select name="stype" id="stype" class="form-control" required>
-                                    <?php echo $inventory->staffTypeDropdownList();?>
+                            <div class="form-group">
+                                <label>Select Category</label>
+                                <select name="stype" id="stype" value="nurse" class="form-control" required>
+                                    <option value="" disabled hidden>Select Post</option>
+                                    <?php echo $inventory->postDropdownList();?>
                                 </select>
                             </div>
 						</div>

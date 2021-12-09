@@ -14,6 +14,7 @@ class Inventory {
 	private $userTable = 'ims_user';
 	private $userTable_hash = 'ims_user_hash';
 	private $staffTable = 'ims_staff';
+	private $postTable = 'ims_staff_type';
 	private $dbConnect = false;
 
     //sql connect
@@ -365,7 +366,7 @@ class Inventory {
 			$ordIndex = $_POST["order"]['0']['column']+1;
 			$sqlQuery .= 'ORDER BY '.$ordIndex.' '.$_POST['order']['0']['dir'].' ';
 		} else {
-			$sqlQuery .= 'ORDER BY staff_name DESC ';
+			$sqlQuery .= 'ORDER BY status DESC ';
 		}
 		if($_POST["length"] != -1){
 			$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
@@ -378,8 +379,15 @@ class Inventory {
 			$supplierRows[] = $supplier['staff_init'];		
 			$supplierRows[] = $supplier['staff_name'];	
 			$supplierRows[] = $supplier['staff_type'];
+			$status = $supplier['status'];
+			if($status==1){
+				$supplierRows[] = "Active";
+			} else {
+				$supplierRows[] = "Inactive";
+			}
+			//$supplierRows[] = $supplier['status'];
 			$supplierRows[] = '<button type="button" name="update" id="'.$supplier["staff_init"].'" class="btn btn-warning btn-xs update">Update</button>';
-			$supplierRows[] = '<button type="button" name="delete" id="'.$supplier["staff_init"].'" class="btn btn-danger btn-xs delete" >Delete</button>';
+			$supplierRows[] = '<button type="button" name="toggle" id="'.$supplier["staff_init"].'" class="btn btn-danger btn-xs delete" >Toggle</button>';
 			$supplierData[] = $supplierRows;
 		}
 		$output = array(
@@ -418,7 +426,6 @@ class Inventory {
 			$output['staff_init'] = $product['staff_init'];
 			$output['staff_name'] = $product['staff_name'];
 			$output['staff_type'] = $product['staff_type'];
-			//$this->getStaffType($product['staff_type']);
 		}
 		echo json_encode($output);
 	}
@@ -433,6 +440,66 @@ class Inventory {
 		}
 		return $dropdownHTML;
 	}
+
+	public function postDropdownList(){		
+		$sqlQuery = "SELECT * FROM ".$this->postTable." 
+			WHERE status = '1'
+			ORDER BY type ASC";	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);	
+		$categoryHTML = '';
+		while( $category = mysqli_fetch_assoc($result)) {
+			$categoryHTML .= '<option value="'.$category["type"].'">'.$category["type"].'</option>';	
+		}
+		return $categoryHTML;
+	}
 	
+	public function toggleStaffStatus(){
+		$sqlQuery = "
+			UPDATE ".$this->staffList."
+			SET status = !status
+			WHERE staff_init = '".$_POST["sid"]."'";
+		mysqli_query($this->dbConnect, $sqlQuery);
+	}
+	
+	public function pherDropdownList(){		
+		$sqlQuery = "SELECT * FROM ".$this->staffTable." 
+			WHERE staff_type = 'radiographer'
+			AND status = '1'
+			ORDER BY staff_name ASC";	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);	
+		$dropdownHTML = '';
+		while( $list = mysqli_fetch_assoc($result)) {
+			$dropdownHTML .= '<option value="'.$list["staff_init"].'">'.$list["staff_init"].' '.$list["staff_name"].'</option>';	
+		}
+		return $dropdownHTML;
+	}
+
+	public function nurseDropdownList(){		
+		$sqlQuery = "SELECT * FROM ".$this->staffTable." 
+			WHERE staff_type = 'nurse'
+			AND status = '1'
+			ORDER BY staff_name ASC";	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);	
+		$dropdownHTML = '';
+		while( $list = mysqli_fetch_assoc($result)) {
+			$dropdownHTML .= '<option value="'.$list["staff_init"].'">'.$list["staff_init"].' '.$list["staff_name"].'</option>';	
+		}
+		return $dropdownHTML;
+	}
+
+	public function gistDropdownList(){		
+		$sqlQuery = "SELECT * FROM ".$this->staffTable." 
+			WHERE staff_type = 'radiologist'
+			AND status = '1'
+			ORDER BY staff_name ASC";	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);	
+		$dropdownHTML = '';
+		while( $list = mysqli_fetch_assoc($result)) {
+			$dropdownHTML .= '<option value="'.$list["staff_init"].'">'.$list["staff_init"].' '.$list["staff_name"].'</option>';	
+		}
+		return $dropdownHTML;
+	}
+
+
 }
 ?>

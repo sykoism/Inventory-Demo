@@ -11,6 +11,8 @@ $inventory->checkLogin();
 
 <?php include('inc/container.php');?>
 
+<?php echo $inventory->gistDropdownList();?>
+
 
 <div class="container">		
 

@@ -11,6 +11,12 @@ $(document).ready(function() {
 			type:"POST",
 			data:{action:'getStaffList'}
 		},
+        "columnDefs":[
+            {
+                "targets":[3, 4],
+                "orderable":false,
+            },
+        ],
 		"pageLength": 10
 	});
 
@@ -25,11 +31,10 @@ $(document).ready(function() {
             dataType:"json",
             success:function(data){
                 $('#staffModal').modal('show');
-                $('#staff_name').val(data.staff_name);
-                $('#staff_init').val(data.staff_init);
-                $('#staff_type').html(data.staff_select_box);
-                $('.modal-title').html("<i class='fa fa-pencil-square-o'></i> Edit Staff");
+                $('#sname').val(data.staff_name);
                 $('#sid').val(sid);
+                $('#stype').val(data.staff_type);
+                $('.modal-title').html("<i class='fa fa-pencil-square-o'></i> Edit Staff");
                 $('#action').val("Edit");
                 $('#btn_action').val("updateStaff");
             }
@@ -38,14 +43,13 @@ $(document).ready(function() {
 
 	//action when clicking 'delete'
 	$(document).on('click', '.delete', function(){
-        var pid = $(this).attr("id");
-        var status = $(this).data("status");
-        var btn_action = 'deleteProduct';
+        var sid = $(this).attr("id");
+        var btn_action = 'toggleStaffStatus';
         if(confirm("Are you sure you want to delete this staff?")) {
             $.ajax({
                 url:"action.php",
                 method:"POST",
-                data:{pid:pid, status:status, btn_action:btn_action},
+                data:{sid:sid, btn_action:btn_action},
                 success:function(data){
                     $('#alert_action').fadeIn().html('<div class="alert alert-info">'+data+'</div>');
                     staffDataTable.ajax.reload();

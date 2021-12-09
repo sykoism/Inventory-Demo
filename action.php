@@ -56,3 +56,7 @@ if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'updateExamInfo') {
 if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'getStaffDetail'){
 	$inventory->getStaffDetail();
 }
+
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'toggleStaffStatus'){
+	$inventory->toggleStaffStatus();
+}

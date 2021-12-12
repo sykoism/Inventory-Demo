@@ -60,3 +60,19 @@ if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'getStaffDetail'){
 if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'toggleStaffStatus'){
 	$inventory->toggleStaffStatus();
 }
+
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'addStaff'){
+	$inventory->addNewStaff();
+}
+
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'updateStaff'){
+	$inventory->updateStaffInfo();
+}
+
+if(!empty($_POST['action']) && $_POST['action'] == 'getAdminExam') {
+	$inventory->getAdminExam();
+}
+
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'deleteExam'){
+	$inventory->deleteExam();
+}

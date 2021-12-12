@@ -16,11 +16,16 @@ $(document).ready(function() {
                 "targets":[3, 4],
                 "orderable":false,
             },
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            },
         ],
 		"pageLength": 10
 	});
 
-	//get staff info when clicking 'update'
+	//get staff info in dialog when clicking 'update'
 	$(document).on('click', '.update', function(){
         var sid = $(this).attr("id");
         var btn_action = 'getStaffDetail';
@@ -34,6 +39,7 @@ $(document).ready(function() {
                 $('#sname').val(data.staff_name);
                 $('#sid').val(sid);
                 $('#stype').val(data.staff_type);
+                $('#sinit').val(data.staff_init);
                 $('.modal-title').html("<i class='fa fa-pencil-square-o'></i> Edit Staff");
                 $('#action').val("Edit");
                 $('#btn_action').val("updateStaff");
@@ -45,7 +51,7 @@ $(document).ready(function() {
 	$(document).on('click', '.delete', function(){
         var sid = $(this).attr("id");
         var btn_action = 'toggleStaffStatus';
-        if(confirm("Are you sure you want to delete this staff?")) {
+        if(confirm("Deactivating staff will make it invisible in staff list, confirm?")) {
             $.ajax({
                 url:"action.php",
                 method:"POST",
@@ -61,16 +67,16 @@ $(document).ready(function() {
     });	
 
     //add new staff
-	$('#addProduct').click(function(){
-        $('#productModal').modal('show');
-        $('#productForm')[0].reset();
-        $('.modal-title').html("<i class='fa fa-plus'></i> Add Product");
+	$('#addStaff').click(function(){
+        $('#staffModal').modal('show');
+        $('#editForm')[0].reset();
+        $('.modal-title').html("<i class='fa fa-plus'></i> Add Staff");
         $('#action').val("Add");
-        $('#btn_action').val("addProduct");
+        $('#btn_action').val("addStaff");
     });
 
 	//Edit staff
-    $(document).on('submit', '#productForm', function(event){
+    $(document).on('submit', '#editForm', function(event){
         event.preventDefault();
         $('#action').attr('disabled', 'disabled');
         var formData = $(this).serialize();
@@ -79,8 +85,8 @@ $(document).ready(function() {
             method:"POST",
             data:formData,
             success:function(data) {
-                $('#productForm')[0].reset();
-                $('#productModal').modal('hide');
+                $('#editForm')[0].reset();
+                $('#staffModal').modal('hide');
                 $('#action').attr('disabled', false);
                 staffDataTable.ajax.reload();
             }

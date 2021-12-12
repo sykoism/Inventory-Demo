@@ -27,13 +27,14 @@ $inventory->checkAdmin();
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-12 table-responsive">
-							<table id="staffList" class="table table-bordered table-striped">
+							<table id="adminExamList" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>AccessionNumber</th>										
+										<th>Exam Date</th>									
 										<th>Patient ID</th>
+										<th>Accession Number</th>
 										<th>Patient Name</th>
-										<th>Exam Date</th>
+										<th>Exam Type</th>
                                         <th>Delete</th>
 									</tr>
 								</thead>

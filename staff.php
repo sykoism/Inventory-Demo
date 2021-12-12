@@ -17,12 +17,14 @@ $inventory->checkAdmin();
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<div class="row">
-						<div>
-							<h3 class="panel-title">Sales Contact</h3>
-						</div>
-					</div>					   
-					<div class="clear:both"></div>
+					<div class="d-flex bd-highlight mb-3">
+					<div class="p-2 bd-highlight">
+							<h3 class="panel-title">Manage Staff List</h3>
+					</div>
+					<div class="d-flex justify-content-end">
+                        <button type="button" name="add" id="addStaff" class="btn btn-success btn-xs">Add</button>
+                    </div>
+					</div>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -30,6 +32,7 @@ $inventory->checkAdmin();
 							<table id="staffList" class="table table-bordered table-striped">
 								<thead>
 									<tr>
+										<th>ID</th>	
 										<th>CorpID</th>										
 										<th>Name</th>
 										<th>Post</th>
@@ -54,7 +57,7 @@ $inventory->checkAdmin();
                         <div class="modal-header">
 							<h4 class="modal-title">Modal title</h4>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+						</div>
 						<div class="modal-body">
 							<div class="form-group">
                                 <label>Staff Name</label>
@@ -62,21 +65,21 @@ $inventory->checkAdmin();
                             </div>
 							<div class="form-group">
                                 <label>CorpID</label>
-                                <input type="text" name="sid" id="sid" class="form-control" required />
+                                <input type="text" name="sinit" id="sinit" class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <label>Select Category</label>
                                 <select name="stype" id="stype" value="nurse" class="form-control" required>
-                                    <option value="" disabled hidden>Select Post</option>
+                                    <option value="" hidden>Select Post</option>
                                     <?php echo $inventory->postDropdownList();?>
                                 </select>
                             </div>
 						</div>
 						<div class="modal-footer">
-                            <input type="hidden" name="pid" id="pid" />
+                            <input type="hidden" name="sid" id="sid" />
                             <input type="hidden" name="btn_action" id="btn_action" />
                             <input type="submit" name="action" id="action" class="btn btn-info" value="Add" />
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                         </div>
 					</div>
 				</form>

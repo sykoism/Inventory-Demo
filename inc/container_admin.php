@@ -12,7 +12,7 @@
           <a class="nav-link" href="#">Inventory Arrival</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="DeleteExam.php">Manage Exam</a>
+          <a class="nav-link" href="AdminExam.php">Manage Exam</a>
         </li>        
         <li class="nav-item">
           <a class="nav-link" href="staff.php">Manage Staff</a>

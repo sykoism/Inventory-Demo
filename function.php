@@ -376,6 +376,7 @@ class Inventory {
 		$supplierData = array();	
 		while( $supplier = mysqli_fetch_assoc($result) ) {
 			$supplierRows = array();
+			$supplierRows[] = $supplier['sid'];
 			$supplierRows[] = $supplier['staff_init'];		
 			$supplierRows[] = $supplier['staff_name'];	
 			$supplierRows[] = $supplier['staff_type'];
@@ -386,8 +387,8 @@ class Inventory {
 				$supplierRows[] = "Inactive";
 			}
 			//$supplierRows[] = $supplier['status'];
-			$supplierRows[] = '<button type="button" name="update" id="'.$supplier["staff_init"].'" class="btn btn-warning btn-xs update">Update</button>';
-			$supplierRows[] = '<button type="button" name="toggle" id="'.$supplier["staff_init"].'" class="btn btn-danger btn-xs delete" >Toggle</button>';
+			$supplierRows[] = '<button type="button" name="update" id="'.$supplier["sid"].'" class="btn btn-warning btn-xs update">Update</button>';
+			$supplierRows[] = '<button type="button" name="toggle" id="'.$supplier["sid"].'" class="btn btn-danger btn-xs delete" >Toggle</button>';
 			$supplierData[] = $supplierRows;
 		}
 		$output = array(
@@ -399,28 +400,10 @@ class Inventory {
 		echo json_encode($output);
 	}
 
-
-/*	public function updateProduct() {		
-		if($_POST['pid']) {	
-			$sqlUpdate = "UPDATE ".$this->productTable." 
-				SET categoryid = '".$_POST['categoryid']."', brandid='".$_POST['brandid']."', pname='".$_POST['pname']."', model='".$_POST['pmodel']."', description='".$_POST['description']."', quantity='".$_POST['quantity']."', unit='".$_POST['unit']."', base_price='".$_POST['base_price']."', tax='".$_POST['tax']."', supplier='".$_POST['supplierid']."' WHERE pid = '".$_POST["pid"]."'";			
-			mysqli_query($this->dbConnect, $sqlUpdate);	
-			echo 'Product Update';
-		}	
-	}	
-	public function addProduct() {		
-		$sqlInsert = "
-			INSERT INTO ".$this->productTable."(categoryid, brandid, pname, model, description, quantity, unit, base_price, tax, minimum_order, supplier) 
-			VALUES ('".$_POST["categoryid"]."', '".$_POST['brandid']."', '".$_POST['pname']."', '".$_POST['pmodel']."', '".$_POST['description']."', '".$_POST['quantity']."', '".$_POST['unit']."', '".$_POST['base_price']."', '".$_POST['tax']."', 1, '".$_POST['supplierid']."')";		
-		mysqli_query($this->dbConnect, $sqlInsert);
-		echo 'New Product Added';
-	}	
-*/
-
 	public function getStaffDetail() {
 		$sqlQuery = "
 			SELECT * FROM ".$this->staffList." 
-			WHERE staff_init = '".$_POST["sid"]."'";
+			WHERE sid = '".$_POST["sid"]."'";
 		$result = mysqli_query($this->dbConnect, $sqlQuery);			
 		while( $product = mysqli_fetch_assoc($result)) {
 			$output['staff_init'] = $product['staff_init'];
@@ -457,7 +440,7 @@ class Inventory {
 		$sqlQuery = "
 			UPDATE ".$this->staffList."
 			SET status = !status
-			WHERE staff_init = '".$_POST["sid"]."'";
+			WHERE sid = '".$_POST["sid"]."'";
 		mysqli_query($this->dbConnect, $sqlQuery);
 	}
 	
@@ -500,6 +483,66 @@ class Inventory {
 		return $dropdownHTML;
 	}
 
+	public function addNewStaff(){
+		$sqlQuery = "INSERT INTO ".$this->staffTable." (staff_name, staff_init, staff_type)
+			VALUES ('".$_POST['sname']."', '".$_POST['sinit']."', '".$_POST['stype']."')";
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+	}
+	
+	public function updateStaffInfo(){
+		$sqlQuery = "UPDATE ".$this->staffTable."
+		SET staff_name = '".$_POST['sname']."', staff_init = '".$_POST['sinit']."', staff_type = '".$_POST['stype']."'
+		WHERE sid = '".$_POST['sid']."'";
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+	}
+
+	public function getAdminExam(){		
+		$sqlQuery = "SELECT * FROM ".$this->examSummary." as esum
+			INNER JOIN ".$this->examSeries." as eser ON esum.ExamID = eser.ExamID ";
+		if(!empty($_POST["search"]["value"])){
+			$sqlQuery .= 'WHERE (PatientID LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (PatientName LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (AccessionNumber LIKE "%'.$_POST["search"]["value"].'%") ';			
+		}
+		if(!empty($_POST["order"])){
+			$ordIndex = $_POST["order"]['0']['column']+1;
+			$sqlQuery .= 'ORDER BY '.$ordIndex.' '.$_POST['order']['0']['dir'].' ';
+		} else {
+			$sqlQuery .= 'ORDER BY ExamDate DESC ';
+		}
+		if($_POST["length"] != -1){
+			$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		$numRows = mysqli_num_rows($result);
+		$inventoryData = array();	
+		while( $inventory = mysqli_fetch_assoc($result) ) {
+			$inventoryRows = array();
+			$inventoryRows[] = $inventory['ExamDate'];		
+			$inventoryRows[] = $inventory['PatientID'];	
+			$inventoryRows[] = $inventory['AccessionNumber'];			
+			$inventoryRows[] = $inventory['PatientName'];
+			$inventoryRows[] = $inventory['ExamName'];
+			$inventoryRows[] = '<button type="button" name="update" id="'.$inventory["AccessionNumber"].'" class="btn btn-warning btn-xs update">Delete</button>';
+			$inventoryData[] = $inventoryRows;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"  	=>  $numRows,
+			"recordsFiltered" 	=> 	$numRows,
+			"data"    			=> 	$inventoryData
+		);
+		echo json_encode($output);
+	}
+
+	public function deleteExam(){
+		$sqlQuery1 = "DELETE FROM ".$this->examSummary."
+		WHERE AccessionNumber = '".$_POST['accnum']."'";
+		$sqlQuery2 = "DELETE FROM ".$this->examDetails."
+		WHERE AccessionNumber = '".$_POST['accnum']."'";
+		$result = mysqli_query($this->dbConnect, $sqlQuery1);
+		$result = mysqli_query($this->dbConnect, $sqlQuery2);
+	}
 
 }
 ?>

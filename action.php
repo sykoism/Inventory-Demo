@@ -13,6 +13,10 @@ if(!empty($_POST['action']) && $_POST['action'] == 'getSupplierList') {
 	$inventory->getSupplierList();
 }
 
+if(!empty($_POST['action']) && $_POST['action'] == 'adminGetSupplierList') {
+	$inventory->adminGetSupplierList();
+}
+
 if(!empty($_POST['action']) && $_POST['action'] == 'getSpecList') {
 	$inventory->getSpecList();
 }
@@ -75,4 +79,8 @@ if(!empty($_POST['action']) && $_POST['action'] == 'getAdminExam') {
 
 if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'deleteExam'){
 	$inventory->deleteExam();
+}
+
+if(!empty($_POST['btn_action']) && $_POST['btn_action'] == 'getSalesDetail'){
+	$inventory->getSalesDetail();
 }

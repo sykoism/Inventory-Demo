@@ -5,6 +5,7 @@ class Inventory {
 	private $password   = '';
 	private $database  = 'dsa_inventory_demo';
 	private $equipment_details = 'ims_equipment_details';
+	private $equipment_threshold = 'ims_equipment_threshold';
 	private $equipment = 'ims_equipment';
 	private $examSummary = 'ims_exam';
 	private $examDetails = 'ims_exam_detail';
@@ -542,6 +543,64 @@ class Inventory {
 		WHERE AccessionNumber = '".$_POST['accnum']."'";
 		$result = mysqli_query($this->dbConnect, $sqlQuery1);
 		$result = mysqli_query($this->dbConnect, $sqlQuery2);
+	}
+
+	//admin sales
+	public function adminGetSupplierList(){		
+		$sqlQuery = "SELECT * FROM ".$this->supplierTable." ";
+		if(!empty($_POST["search"]["value"])){
+			$sqlQuery .= 'WHERE (supplier_name LIKE "%'.$_POST["search"]["value"].'%") ';
+			$sqlQuery .= 'OR (salesperson LIKE "%'.$_POST["search"]["value"].'%") ';			
+		}
+		if(!empty($_POST["order"])){
+			$ordIndex = $_POST["order"]['0']['column']+1;
+			$sqlQuery .= 'ORDER BY '.$ordIndex.' '.$_POST['order']['0']['dir'].' ';
+		} else {
+			$sqlQuery .= 'ORDER BY supplier_id DESC ';
+		}
+		if($_POST["length"] != -1){
+			$sqlQuery .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}	
+		$result = mysqli_query($this->dbConnect, $sqlQuery);
+		$numRows = mysqli_num_rows($result);
+		$supplierData = array();	
+		while( $supplier = mysqli_fetch_assoc($result) ) {	
+			$status = '';
+			if($supplier['status'] == 'active') {
+				$status = '<span class="label label-success">Active</span>';
+			} else {
+				$status = '<span class="label label-danger">Inactive</span>';
+			}
+			$supplierRows = array();
+			$supplierRows[] = $supplier['supplier_id'];		
+			$supplierRows[] = $supplier['supplier_name'];	
+			$supplierRows[] = $supplier['salesperson'];			
+			$supplierRows[] = $supplier['mobile'];
+			$supplierRows[] = $status;
+			$supplierRows[] = '<button type="button" name="update" id="'.$supplier["supplier_id"].'" class="btn btn-warning btn-xs update">Update</button>';
+			$supplierRows[] = '<button type="button" name="toggle" id="'.$supplier["supplier_id"].'" class="btn btn-danger btn-xs delete" >Toggle</button>';
+			$supplierData[] = $supplierRows;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"  	=>  $numRows,
+			"recordsFiltered" 	=> 	$numRows,
+			"data"    			=> 	$supplierData
+		);
+		echo json_encode($output);
+	}
+
+	public function getSalesDetail() {
+		$sqlQuery = "
+			SELECT * FROM ".$this->supplierTable." 
+			WHERE supplier_id = '".$_POST["cid"]."'";
+		$result = mysqli_query($this->dbConnect, $sqlQuery);			
+		while( $product = mysqli_fetch_assoc($result)) {
+			$output['supplier_name'] = $product['supplier_name'];
+			$output['salesperson'] = $product['salesperson'];
+			$output['mobile'] = $product['mobile'];
+		}
+		echo json_encode($output);
 	}
 
 }

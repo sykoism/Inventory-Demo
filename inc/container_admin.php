@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Inventory Arrival</a>
+          <a class="nav-link" href="addInventory.php">Inventory Arrival</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="AdminExam.php">Manage Exam</a>
@@ -18,7 +18,7 @@
           <a class="nav-link" href="staff.php">Manage Staff</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Manage Sales</a>
+          <a class="nav-link" href="AdminSales.php">Manage Sales</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="LowInventory.php">Threshold of "Low" Inventory</a>

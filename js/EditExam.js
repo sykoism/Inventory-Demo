@@ -43,7 +43,7 @@ $(document).ready(function() {
         })
     });
 
-    //auto add rows for inventory
+    //function of adding rows for inventory
     var t = $('#example').DataTable({
         "pageLength": 50,
         columnDefs: [{

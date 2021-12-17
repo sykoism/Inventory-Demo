@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
--- 產生時間： 2021-11-04 14:26:11
--- 伺服器版本： 10.4.21-MariaDB
--- PHP 版本： 8.0.11
+-- Host: 127.0.0.1
+-- Generation Time: Dec 15, 2021 at 02:38 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫: `dsa_inventory_demo`
+-- Database: `dsa_inventory_demo`
 --
+CREATE DATABASE IF NOT EXISTS `dsa_inventory_demo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dsa_inventory_demo`;
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_equipment`
+-- Table structure for table `ims_equipment`
 --
 
 CREATE TABLE `ims_equipment` (
@@ -36,7 +38,7 @@ CREATE TABLE `ims_equipment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `ims_equipment`
+-- Dumping data for table `ims_equipment`
 --
 
 INSERT INTO `ims_equipment` (`EquipmentID`, `EquipmentModel`, `ExpiryDate`, `LotNum`, `InventoryOnHand`) VALUES
@@ -45,7 +47,7 @@ INSERT INTO `ims_equipment` (`EquipmentID`, `EquipmentModel`, `ExpiryDate`, `Lot
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_equipment_details`
+-- Table structure for table `ims_equipment_details`
 --
 
 CREATE TABLE `ims_equipment_details` (
@@ -56,7 +58,7 @@ CREATE TABLE `ims_equipment_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `ims_equipment_details`
+-- Dumping data for table `ims_equipment_details`
 --
 
 INSERT INTO `ims_equipment_details` (`EquipmentModel`, `EquipmentName`, `supplier_id`, `EquipmentType`) VALUES
@@ -66,7 +68,7 @@ INSERT INTO `ims_equipment_details` (`EquipmentModel`, `EquipmentName`, `supplie
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_equipment_filled`
+-- Table structure for table `ims_equipment_filled`
 --
 
 CREATE TABLE `ims_equipment_filled` (
@@ -79,7 +81,18 @@ CREATE TABLE `ims_equipment_filled` (
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_equipment_used`
+-- Table structure for table `ims_equipment_threshold`
+--
+
+CREATE TABLE `ims_equipment_threshold` (
+  `equipmentID` varchar(15) NOT NULL,
+  `threshold` tinyint(3) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ims_equipment_used`
 --
 
 CREATE TABLE `ims_equipment_used` (
@@ -90,7 +103,7 @@ CREATE TABLE `ims_equipment_used` (
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_exam`
+-- Table structure for table `ims_exam`
 --
 
 CREATE TABLE `ims_exam` (
@@ -102,17 +115,18 @@ CREATE TABLE `ims_exam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `ims_exam`
+-- Dumping data for table `ims_exam`
 --
 
 INSERT INTO `ims_exam` (`PatientID`, `AccessionNumber`, `PatientName`, `ExamID`, `ExamDate`) VALUES
 ('A123456(7)', 'KWH002712345P', 'CHAN TAI MAN', 2216, '2021-07-13'),
-('UE765432(1)', 'KWH006543216O', 'CHEUNG SIU MING', 6121, '2021-08-18');
+('UE765432(1)', 'KWH006543216O', 'CHEUNG SIU MING', 6121, '2021-08-18'),
+('H7214682', 'KWH006544321O', 'CHAN SIU MING', 2216, '2021-11-30');
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_exam_detail`
+-- Table structure for table `ims_exam_detail`
 --
 
 CREATE TABLE `ims_exam_detail` (
@@ -123,16 +137,17 @@ CREATE TABLE `ims_exam_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `ims_exam_detail`
+-- Dumping data for table `ims_exam_detail`
 --
 
 INSERT INTO `ims_exam_detail` (`AccessionNumber`, `Radiologist`, `Radiographer`, `Nurse`) VALUES
-('KWH002712345P', 'ott789', 'nyc456', 'cmy123');
+('KWH002712345P', 'ott789', 'nyc456', 'cmy123'),
+('KWH006544321O', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_exam_series`
+-- Table structure for table `ims_exam_series`
 --
 
 CREATE TABLE `ims_exam_series` (
@@ -141,7 +156,7 @@ CREATE TABLE `ims_exam_series` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `ims_exam_series`
+-- Dumping data for table `ims_exam_series`
 --
 
 INSERT INTO `ims_exam_series` (`ExamID`, `ExamName`) VALUES
@@ -151,28 +166,52 @@ INSERT INTO `ims_exam_series` (`ExamID`, `ExamName`) VALUES
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_staff`
+-- Table structure for table `ims_staff`
 --
 
 CREATE TABLE `ims_staff` (
+  `sid` int(11) NOT NULL,
   `staff_name` varchar(50) NOT NULL,
   `staff_init` varchar(10) NOT NULL,
-  `staff_type` enum('radiologist','radiographer','nurse') DEFAULT NULL
+  `staff_type` enum('radiologist','radiographer','nurse') DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `ims_staff`
+-- Dumping data for table `ims_staff`
 --
 
-INSERT INTO `ims_staff` (`staff_name`, `staff_init`, `staff_type`) VALUES
-('CHEUNG MING YAN', 'cmy123', 'nurse'),
-('NG YING CHUN', 'nyc456', 'radiographer'),
-('ONE TWO THREE', 'ott789', 'radiologist');
+INSERT INTO `ims_staff` (`sid`, `staff_name`, `staff_init`, `staff_type`, `status`) VALUES
+(1, 'CHEUNG MING YIN', 'cmy123', 'nurse', 1),
+(2, 'NG YING CHUN', 'nyc456', 'radiographer', 1),
+(3, 'FOUR FIVE SIX', 'oeg274', 'radiographer', 1),
+(4, 'ONE TWO THREE', 'ott789', 'radiologist', 1);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_supplier`
+-- Table structure for table `ims_staff_type`
+--
+
+CREATE TABLE `ims_staff_type` (
+  `id` tinyint(4) NOT NULL,
+  `type` varchar(15) NOT NULL,
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ims_staff_type`
+--
+
+INSERT INTO `ims_staff_type` (`id`, `type`, `status`) VALUES
+(1, 'radiographer', 1),
+(2, 'radiologist', 1),
+(3, 'nurse', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ims_supplier`
 --
 
 CREATE TABLE `ims_supplier` (
@@ -184,7 +223,7 @@ CREATE TABLE `ims_supplier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `ims_supplier`
+-- Dumping data for table `ims_supplier`
 --
 
 INSERT INTO `ims_supplier` (`supplier_id`, `supplier_name`, `salesperson`, `mobile`, `status`) VALUES
@@ -194,7 +233,7 @@ INSERT INTO `ims_supplier` (`supplier_id`, `supplier_name`, `salesperson`, `mobi
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `ims_user`
+-- Table structure for table `ims_user`
 --
 
 CREATE TABLE `ims_user` (
@@ -206,68 +245,52 @@ CREATE TABLE `ims_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 傾印資料表的資料 `ims_user`
+-- Dumping data for table `ims_user`
 --
 
 INSERT INTO `ims_user` (`userid`, `username`, `password`, `type`, `status`) VALUES
 ('admin', 'Administrator', '202cb962ac59075b964b07152d234b70', 'admin', 'Active'),
 ('user', 'User', '250cf8b51c773f3f8dc8b4be867a9a02', 'member', 'Active');
 
--- --------------------------------------------------------
-
 --
--- 資料表結構 `ims_user_hash`
---
-
-CREATE TABLE `ims_user_hash` (
-  `userid` varchar(10) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `type` enum('admin','member') NOT NULL,
-  `status` enum('Active','Inactive') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 傾印資料表的資料 `ims_user_hash`
---
-
-INSERT INTO `ims_user_hash` (`userid`, `username`, `password`, `type`, `status`) VALUES
-('admin', 'Administrator', '$2y$10$tSnWQG2fyZ57uaNvI3qTTuEv2FescnNO/XSYYNCRmM.4T9nMse9xi', 'admin', 'Active'),
-('user', 'User', '$2y$10$BJg21/Nujwbb7ujIeJdS8.J7G9.xfewgpDufiaxMKyl3JX59W1Ckq', 'member', 'Active');
-
---
--- 已傾印資料表的索引
+-- Indexes for dumped tables
 --
 
 --
--- 資料表索引 `ims_equipment`
+-- Indexes for table `ims_equipment`
 --
 ALTER TABLE `ims_equipment`
   ADD PRIMARY KEY (`EquipmentID`),
   ADD KEY `EquipmentModel` (`EquipmentModel`);
 
 --
--- 資料表索引 `ims_equipment_details`
+-- Indexes for table `ims_equipment_details`
 --
 ALTER TABLE `ims_equipment_details`
   ADD PRIMARY KEY (`EquipmentModel`),
   ADD KEY `supplier_id` (`supplier_id`);
 
 --
--- 資料表索引 `ims_equipment_used`
+-- Indexes for table `ims_equipment_threshold`
+--
+ALTER TABLE `ims_equipment_threshold`
+  ADD PRIMARY KEY (`equipmentID`);
+
+--
+-- Indexes for table `ims_equipment_used`
 --
 ALTER TABLE `ims_equipment_used`
   ADD PRIMARY KEY (`AccessionNumber`);
 
 --
--- 資料表索引 `ims_exam`
+-- Indexes for table `ims_exam`
 --
 ALTER TABLE `ims_exam`
   ADD PRIMARY KEY (`AccessionNumber`),
   ADD KEY `ExamID` (`ExamID`);
 
 --
--- 資料表索引 `ims_exam_detail`
+-- Indexes for table `ims_exam_detail`
 --
 ALTER TABLE `ims_exam_detail`
   ADD PRIMARY KEY (`AccessionNumber`),
@@ -276,59 +299,69 @@ ALTER TABLE `ims_exam_detail`
   ADD KEY `Nurse` (`Nurse`);
 
 --
--- 資料表索引 `ims_exam_series`
+-- Indexes for table `ims_exam_series`
 --
 ALTER TABLE `ims_exam_series`
   ADD PRIMARY KEY (`ExamID`);
 
 --
--- 資料表索引 `ims_staff`
+-- Indexes for table `ims_staff`
 --
 ALTER TABLE `ims_staff`
-  ADD PRIMARY KEY (`staff_init`);
+  ADD PRIMARY KEY (`sid`) USING BTREE;
 
 --
--- 資料表索引 `ims_supplier`
+-- Indexes for table `ims_staff_type`
+--
+ALTER TABLE `ims_staff_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ims_supplier`
 --
 ALTER TABLE `ims_supplier`
   ADD PRIMARY KEY (`supplier_id`);
 
 --
--- 資料表索引 `ims_user`
---
-ALTER TABLE `ims_user`
-  ADD UNIQUE KEY `userid` (`userid`);
-
---
--- 資料表索引 `ims_user_hash`
---
-ALTER TABLE `ims_user_hash`
-  ADD UNIQUE KEY `userid` (`userid`);
-
---
--- 已傾印資料表的限制式
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- 資料表的限制式 `ims_equipment`
+-- AUTO_INCREMENT for table `ims_staff`
+--
+ALTER TABLE `ims_staff`
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ims_staff_type`
+--
+ALTER TABLE `ims_staff_type`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `ims_equipment`
 --
 ALTER TABLE `ims_equipment`
   ADD CONSTRAINT `ims_equipment_ibfk_1` FOREIGN KEY (`EquipmentModel`) REFERENCES `ims_equipment_details` (`EquipmentModel`);
 
 --
--- 資料表的限制式 `ims_equipment_details`
+-- Constraints for table `ims_equipment_details`
 --
 ALTER TABLE `ims_equipment_details`
   ADD CONSTRAINT `ims_equipment_details_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `ims_supplier` (`supplier_id`);
 
 --
--- 資料表的限制式 `ims_exam`
+-- Constraints for table `ims_exam`
 --
 ALTER TABLE `ims_exam`
   ADD CONSTRAINT `ims_exam_ibfk_1` FOREIGN KEY (`ExamID`) REFERENCES `ims_exam_series` (`ExamID`);
 
 --
--- 資料表的限制式 `ims_exam_detail`
+-- Constraints for table `ims_exam_detail`
 --
 ALTER TABLE `ims_exam_detail`
   ADD CONSTRAINT `ims_exam_detail_ibfk_2` FOREIGN KEY (`Radiologist`) REFERENCES `ims_staff` (`staff_init`),

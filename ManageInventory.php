@@ -45,6 +45,7 @@ $inventory->checkLogin();
 		</div>	
 	</div>	
 </div>	
-	
+
+<!--Total number of inventory filtered here-->
 
 <?php include('inc/footer.php');?>

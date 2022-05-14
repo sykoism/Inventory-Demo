@@ -15,6 +15,7 @@ $inventory->checkLogin();
 <br>
 <h4>You can try every function and give me the feedback!</h4>
 		
-	
+<br>
+<h4>A dashboard here to show current error in inventory e.g. negative stock.</h4>	
 
 <?php include('inc/footer.php');?>

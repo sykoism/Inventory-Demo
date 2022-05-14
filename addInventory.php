@@ -40,7 +40,7 @@ $inventory->checkAdmin();
 	</div>
 								
 </div>	
-
+<!--Barcode input-->
 
 
 <?php include('inc/footer.php');?>
